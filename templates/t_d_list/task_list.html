@@ -1,37 +1,47 @@
 {% extends "base.html" %}
-{% block content %}
-  <a href="{% url 't_d_list:task_create' %}" class="btn btn-success link-to-page">
-      Create New Task
-  </a>
-  <div style="margin-top: 50px;" class="container">
-    <h1 class="text-center">Your own task manager</h1>
-    <h3 class="text-center">Handle your time!</h3>
 
-    <div class="row">
-      {% for task in tasks %}
-        <div class="col-md-4">
-          <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title">{{ task.content }}</h5>
-              <p class="card-text">Created: {{ task.created_datetime }}</p>
-              {% if task.deadline_datetime %}
-                <p class="card-text">Deadline: {{ task.deadline_datetime }}</p>
-              {% endif %}
-              <p class="card-text">
-                {% if task.is_done %}
-                  <span class="badge bg-success">Completed</span>
-                {% else %}
-                  <span class="badge bg-secondary">Not completed</span>
-                {% endif %}
-              </p>
-              <div class="btn-group" role="group">
-                <a href="{% url 't_d_list:task_update' task.pk %}" class="btn btn-primary">Update</a>
-                <a href="{% url 't_d_list:task_delete' task.pk %}" class="btn btn-danger">Delete</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Your own task manager</h1>
+    <h3 class="text-center" style="color: gray"><i>Handle your time!</i></h3>
+    <br>
+    <div class="d-flex justify-content-center">
+        <a href="{% url 't_d_list:task_create' %}" class="btn btn-outline-info">
+            <strong>Create New Task</strong>
+        </a>
     </div>
-  </div>
+    <br>
+    <div class="row">
+        {% for task in tasks %}
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ task.content }}</h5>
+                    <p class="card-text"><strong><i>Created:</i></strong> {{ task.created_datetime }}</p>
+                    {% if task.deadline_datetime %}
+                    <p class="card-text"><strong><i>Deadline:</i></strong> {{ task.deadline_datetime }}</p>
+                    {% endif %}
+                    <p class="card-text">
+                        {% if task.is_done %}
+                        <span class="badge bg-success">Completed</span>
+                        {% else %}
+                        <span class="badge bg-secondary">Not completed</span>
+                        {% endif %}
+                    </p>
+                    <h6 class="card-subtitle mb-2 text-muted">Tags:</h6>
+                    <ul class="list-inline">
+                        {% for tag in task.tags.all %}
+                        <li class="list-inline-item"><span class="badge bg-info">{{ tag.name }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    <div class="btn-group" role="group">
+                        <a href="{% url 't_d_list:task_update' task.pk %}" class="btn btn-outline-success">Update</a>
+                        <a href="{% url 't_d_list:task_delete' task.pk %}" class="btn btn-outline-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

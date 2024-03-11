@@ -1,47 +1,54 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
-{% block title %}<title>Tags</title>{% endblock %}
-{% block content %}
-  <h1>
-    Tags List
-    <a href="{% url 't_d_list:tags_create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
+{% block title %}
+  <title>Tags</title>
+{% endblock %}
 
-  {% if tags %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-    <ul>
-      {% for tag in tags %}
-        <tr>
-          <td>
-            {{ tag.id }}
-          </td>
-          <td>
-            {{ tag.name }}
-          </td>
-          <td>
-            <a href="{% url 't_d_list:tags_update' pk=tag.id %}">
-              Update
-            </a>
-          </td>
-          <td>
-            <a style="color: red"
-               href="{% url 't_d_list:tags_delete' pk=tag.id %}">
-              Delete
-            </a>
-          </td>
-        </tr>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>OOOPS...it's empty</p>
-  {% endif %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Tags List</h1>
+      </div>
+      <div class="col-md-4 text-right">
+        <a href="{% url 't_d_list:tags_create' %}" class="btn btn-success">
+          Create New Tag
+        </a>
+      </div>
+    </div>
+
+    {% if tags %}
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tag in tags %}
+            <tr>
+              <td><strong>{{ tag.id }}</strong></td>
+              <td><strong>{{ tag.name }}</strong></td>
+              <td>
+                <a href="{% url 't_d_list:tags_update' pk=tag.id %}" class="btn btn-outline-primary">
+                  Update
+                </a>
+              </td>
+              <td>
+                <a href="{% url 't_d_list:tags_delete' pk=tag.id %}" class="btn btn-outline-danger">
+                  Delete
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="mt-3">OOOPS...it's empty</p>
+    {% endif %}
+  </div>
 {% endblock %}

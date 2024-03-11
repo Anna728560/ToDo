@@ -1,5 +1,16 @@
 <ul class="sidebar-nav list-group">
-  <li class="list-group-item"><a href="{% url 't_d_list:task_list' %}">Home</a></li>
-  <li class="list-group-item"><a href="{% url 't_d_list:tags_list' %}">All tags</a></li>
+  <li class="list-group-item btn btn-outline-primary"
+      style="background-color: lightgray;">
+    <a href="{% url 't_d_list:task_list' %}"
+       style="color: #333;">
+      <strong>Home</strong>
+    </a>
+  </li>
+  <li class="list-group-item btn btn-outline-primary"
+      style="background-color: lightgray;">
+    <a href="{% url 't_d_list:tags_list' %}"
+       style="color: #333;">
+      <strong>All tags</strong>
+    </a>
+  </li>
 </ul>
-
