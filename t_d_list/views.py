@@ -9,6 +9,23 @@ class TaskListView(generic.ListView):
     context_object_name = "tasks"
 
 
+class TaskCreateView(generic.CreateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("t_d_list:task_list")
+
+
+class TaskUpdateView(generic.UpdateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("t_d_list:task_list")
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("t_d_list:task_list")
+
+
 class TagsListView(generic.ListView):
     model = Tag
     template_name = 't_d_list/tags_list.html'
@@ -18,16 +35,16 @@ class TagsListView(generic.ListView):
 class TagsCreateView(generic.CreateView):
     model = Tag
     fields = "__all__"
-    success_url = reverse_lazy("t_d_list:tags")
+    success_url = reverse_lazy("t_d_list:tags_list")
 
 
 class TagsUpdateView(generic.UpdateView):
     model = Tag
     fields = "__all__"
-    success_url = reverse_lazy("t_d_list:tags")
+    success_url = reverse_lazy("t_d_list:tags_list")
 
 
 class TagsDeleteView(generic.DeleteView):
     model = Tag
-    success_url = reverse_lazy("t_d_list:tags")
+    success_url = reverse_lazy("t_d_list:tags_list")
 

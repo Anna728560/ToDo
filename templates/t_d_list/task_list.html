@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+  <a href="{% url 't_d_list:task_create' %}" class="btn btn-success link-to-page">
+      Create New Task
+  </a>
   <div style="margin-top: 50px;" class="container">
     <h1 class="text-center">Your own task manager</h1>
     <h3 class="text-center">Handle your time!</h3>
@@ -22,8 +25,8 @@
                 {% endif %}
               </p>
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary">Open</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <a href="{% url 't_d_list:task_update' task.pk %}" class="btn btn-primary">Update</a>
+                <a href="{% url 't_d_list:task_delete' task.pk %}" class="btn btn-danger">Delete</a>
               </div>
             </div>
           </div>
