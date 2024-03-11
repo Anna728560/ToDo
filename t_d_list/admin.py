@@ -4,7 +4,12 @@ from .models import Task, Tag
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ("content", "created_datetime", "deadline_datetime", "is_done")
+    list_display = (
+        "content",
+        "created_datetime",
+        "deadline_datetime",
+        "is_done"
+    )
 
 
 @admin.register(Tag)
