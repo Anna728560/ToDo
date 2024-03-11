@@ -15,5 +15,6 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
 
+
     def __str__(self):
         return self.content
