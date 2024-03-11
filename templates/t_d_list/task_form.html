@@ -4,11 +4,11 @@
 {% block title %}<title>{{ object|yesno:"Update,Create" }} task</title>{% endblock %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} tag</h1>
+  <h1>{{ object|yesno:"Update,Create" }} task</h1>
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
 
-    <input type="submit" value="Submit" class="btn btn-primary">
+    <input type="submit" value="Submit" class="btn btn-outline-success">
   </form>
 {% endblock %}
