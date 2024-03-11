@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+  <div style="margin-top: 50px;" class="container">
+    <h1 class="text-center">Your own task manager</h1>
+    <h3 class="text-center">Handle your time!</h3>
+
+    <div class="row">
+      {% for task in tasks %}
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ task.content }}</h5>
+              <p class="card-text">Created: {{ task.created_datetime }}</p>
+              {% if task.deadline_datetime %}
+                <p class="card-text">Deadline: {{ task.deadline_datetime }}</p>
+              {% endif %}
+              <p class="card-text">
+                {% if task.is_done %}
+                  <span class="badge bg-success">Completed</span>
+                {% else %}
+                  <span class="badge bg-secondary">Not completed</span>
+                {% endif %}
+              </p>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary">Open</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
