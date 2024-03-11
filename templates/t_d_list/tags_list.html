@@ -35,12 +35,12 @@
               <td><strong>{{ tag.name }}</strong></td>
               <td>
                 <a href="{% url 't_d_list:tags_update' pk=tag.id %}" class="btn btn-outline-primary">
-                  Update
+                  <strong>Update</strong>
                 </a>
               </td>
               <td>
                 <a href="{% url 't_d_list:tags_delete' pk=tag.id %}" class="btn btn-outline-danger">
-                  Delete
+                  <strong>Delete</strong>
                 </a>
               </td>
             </tr>
