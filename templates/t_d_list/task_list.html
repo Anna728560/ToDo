@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+      <h1 class="text-center">Your own task manager</h1>
+      <h3 class="text-center" style="color: midnightblue"><i>Handle your time!</i></h3>
+      <br>
+      <div class="d-flex justify-content-center">
+        <a href="{% url 't_d_list:task_create' %}" class="btn btn-info">
+          <strong>Create New Task</strong>
+        </a>
+      </div>
+
+
+    <br>
+    <div class="row">
+
+      {% for task in tasks %}
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <div class="card-body" style="background-color: whitesmoke; border: 1px solid black">
+              <h4 class="card-title"><strong>{{ task.content }}</strong></h4>
+              <hr style="border-top: 1px solid lightgray;">
+              <p class="card-text"><strong><i>Created:</i></strong> {{ task.created_datetime }}</p>
+
+              {% if task.deadline_datetime %}
+                <p class="card-text">
+                  <strong><i>Deadline:</i></strong> {{ task.deadline_datetime }}
+                </p>
+              {% endif %}
+              <hr style="border-top: 1px solid lightgray;">
+
+              <p class="card-text">
+                {% if task.is_done %}
+                  <a href="{% url 't_d_list:tag-complete' pk=task.id %}"
+                     class="badge btn btn-outline-success">
+                    Completed
+                  </a>
+                {% else %}
+                  <a href="{% url 't_d_list:tag-complete' pk=task.id %}"
+                     class="badge btn btn-outline-danger">
+                    Not completed
+                  </a>
+                {% endif %}
+
+                <span style="color: gray; margin-left: 5px;"> ⬅️ click to change</span>
+              </p>
+
+              <hr style="border-top: 1px solid lightgray;">
+
+              <h6 class="card-subtitle mb-2 text-muted">Tags:</h6>
+
+              <ul class="list-inline">
+                {% for tag in task.tags.all %}
+                  <li class="list-inline-item"><span class="badge btn btn-outline-info">{{ tag.name }}</span></li>
+                {% endfor %}
+              </ul>
+              <hr style="border-top: 1px solid lightgray;">
+              <div style="text-align: center">
+                <a href="{% url 't_d_list:task_update' task.pk %}"
+                   class="btn btn-outline-success"><strong>Update</strong></a>
+                <a href="{% url 't_d_list:task_delete' task.pk %}"
+                   class="btn btn-outline-danger"><strong>Delete</strong></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
